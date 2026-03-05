@@ -26,6 +26,790 @@
     position: relative;
   }
 
+  .petal {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--rose);
+    border-radius: 50% 0 50% 0;
+    opacity: 0.15;
+    animation: fall linear infinite;
+    pointer-events: none;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.2; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 120px;
+  }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ===== SCREEN 1 ===== */
+  #screen1 { animation: fadeUp 1s ease forwards; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .envelope-header { text-align: center; margin-bottom: 40px; }
+  .envelope-icon {
+    font-size: 64px;
+    animation: pulse 2s ease infinite;
+    display: block; margin-bottom: 10px;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+  }
+
+  .letter-card {
+    background: white; border-radius: 20px;
+    padding: 50px 44px;
+    box-shadow: 0 8px 40px rgba(232,80,122,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    position: relative; border-top: 4px solid var(--rose);
+  }
+  .letter-card::before {
+    content: '❝';
+    position: absolute; top: 20px; left: 24px;
+    font-size: 48px; color: var(--blush);
+    font-family: 'Playfair Display', serif; line-height: 1;
+  }
+  .letter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; color: var(--rose);
+    margin-bottom: 24px; text-align: center;
+  }
+  .letter-body { font-size: 16px; line-height: 1.9; color: #4a3040; font-weight: 300; }
+  .letter-body p { margin-bottom: 16px; }
+  .letter-body .highlight { color: var(--rose); font-style: italic; font-family: 'Playfair Display', serif; }
+  .letter-sign { margin-top: 28px; text-align: right; font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: var(--rose); }
+
+  .btn-primary {
+    display: block; width: 100%; margin-top: 36px; padding: 16px;
+    background: var(--rose); color: white; border: none; border-radius: 50px;
+    font-size: 17px; font-family: 'Lato', sans-serif; cursor: pointer;
+    letter-spacing: 0.5px; transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(232,80,122,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,80,122,0.45); }
+
+  /* ===== SCREEN 2 ===== */
+  #screen2 { animation: fadeUp 0.6s ease forwards; }
+
+  .question-card {
+    background: white; border-radius: 20px;
+    padding: 50px 36px 40px;
+    box-shadow: 0 8px 40px rgba(232,80,122,0.12);
+    text-align: center; position: relative; overflow: hidden;
+  }
+
+  .sad-face-wrap {
+    display: none; flex-direction: column;
+    align-items: center; margin-bottom: 24px;
+    animation: shakeHead 0.6s ease;
+  }
+  .sad-face-wrap.show { display: flex; }
+  @keyframes shakeHead {
+    0%,100% { transform: translateX(0); }
+    20%     { transform: translateX(-6px); }
+    40%     { transform: translateX(6px); }
+    60%     { transform: translateX(-6px); }
+    80%     { transform: translateX(4px); }
+  }
+  .cry-text { font-size: 13px; color: #9b6080; margin-top: 8px; font-style: italic; }
+
+  .baby-gifs-wrap {
+    display: none; justify-content: center;
+    align-items: flex-end; gap: 10px;
+    margin: 8px 0 4px; flex-wrap: wrap;
+  }
+  .baby-gifs-wrap.show {
+    display: flex;
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  @keyframes popIn {
+    0%   { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+  .baby-gif-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .baby-gif-item img {
+    width: 78px; height: 78px; object-fit: cover;
+    border-radius: 14px; border: 2.5px solid #fbc4d4;
+    box-shadow: 0 4px 14px rgba(232,80,122,0.22);
+    animation: wiggle 1.4s ease-in-out infinite alternate;
+  }
+  .baby-gif-item:nth-child(2) img { width: 92px; height: 92px; animation-delay: 0.25s; }
+  .baby-gif-item:nth-child(3) img { animation-delay: 0.5s; }
+  @keyframes wiggle {
+    0%   { transform: rotate(-4deg) scale(1); }
+    100% { transform: rotate(4deg) scale(1.05); }
+  }
+  .baby-gif-caption { font-size: 10px; color: #c0809a; font-style: italic; }
+  .gif-headline {
+    display: none; font-size: 13px; color: var(--rose);
+    font-style: italic; margin: 4px 0 2px;
+    font-family: 'Playfair Display', serif;
+  }
+  .gif-headline.show { display: block; animation: fadeUp 0.4s ease; }
+
+  .question-text { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--deep); margin-bottom: 12px; line-height: 1.4; }
+  .no-count-label { font-size: 13px; color: #c0809a; margin-bottom: 32px; min-height: 20px; }
+  .emoji-explosion { font-size: 32px; margin-bottom: 16px; min-height: 40px; animation: bounceIn 0.4s ease; }
+  @keyframes bounceIn {
+    0%   { transform: scale(0.4); opacity: 0; }
+    60%  { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .btn-row { display: flex; gap: 16px; justify-content: center; margin-top: 10px; }
+  .btn-yes {
+    padding: 14px 48px;
+    background: linear-gradient(135deg, #43c97a, #26a96c);
+    color: white; border: none; border-radius: 50px; font-size: 18px;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(38,169,108,0.3);
+    font-family: 'Lato', sans-serif;
+  }
+  .btn-yes:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 24px rgba(38,169,108,0.45); }
+  .btn-no {
+    padding: 14px 48px; background: white; color: var(--rose);
+    border: 2px solid var(--rose); border-radius: 50px; font-size: 18px;
+    cursor: pointer; transition: all 0.3s; font-family: 'Lato', sans-serif;
+  }
+  .btn-no:hover { background: var(--blush); transform: translateY(-2px); }
+
+  /* ===== SCREEN 3 ===== */
+  #screen3 { animation: fadeUp 0.8s ease forwards; }
+  .celebration-card {
+    background: white; border-radius: 20px; padding: 60px 36px;
+    text-align: center; box-shadow: 0 8px 40px rgba(139,47,201,0.12);
+  }
+  .confetti-row { font-size: 36px; margin-bottom: 20px; animation: spin 1s ease; }
+  @keyframes spin {
+    from { transform: rotate(-10deg) scale(0.7); opacity: 0; }
+    to   { transform: rotate(0deg) scale(1); opacity: 1; }
+  }
+  .celebrate-title { font-family: 'Playfair Display', serif; font-size: 34px; color: var(--deep); margin-bottom: 12px; }
+  .celebrate-sub { font-size: 16px; color: #7a5a8a; margin-bottom: 40px; line-height: 1.6; }
+  .unblock-wrap { display: flex; justify-content: center; margin-top: 10px; }
+  .btn-unblock {
+    padding: 18px 52px; background: var(--purple);
+    color: white; border: none; border-radius: 50px;
+    font-size: 18px; font-family: 'Lato', sans-serif;
+    cursor: pointer; position: relative; letter-spacing: 0.5px;
+    transition: transform 0.3s; animation: purpleGlow 1.8s ease-in-out infinite; z-index: 1;
+  }
+  .btn-unblock:hover { transform: scale(1.05); }
+  @keyframes purpleGlow {
+    0%,100% { box-shadow: 0 0 10px 2px rgba(192,132,252,0.4), 0 0 28px 8px rgba(139,47,201,0.25); }
+    50%      { box-shadow: 0 0 18px 6px rgba(192,132,252,0.8), 0 0 50px 18px rgba(139,47,201,0.5), 0 0 80px 30px rgba(192,132,252,0.2); }
+  }
+  .stats-note { margin-top: 20px; font-size: 13px; color: #b09ab8; font-style: italic; }
+
+  /* ===== WHATSAPP CHAT WIDGET ===== */
+  #chatToggle {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 60px; height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+    z-index: 1000;
+    animation: chatBounce 2s ease-in-out infinite;
+    border: none;
+  }
+  @keyframes chatBounce {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+  }
+  #chatToggle svg { width: 32px; height: 32px; fill: white; }
+  #chatBadge {
+    position: absolute; top: -4px; right: -4px;
+    background: red; color: white;
+    border-radius: 50%; width: 20px; height: 20px;
+    font-size: 11px; font-weight: bold;
+    display: none; align-items: center; justify-content: center;
+    font-family: 'Lato', sans-serif;
+  }
+  #chatBadge.show { display: flex; }
+
+  #chatWindow {
+    position: fixed;
+    bottom: 96px; right: 24px;
+    width: 340px; height: 520px;
+    background: #f0ece4;
+    border-radius: 18px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999;
+    animation: slideUp 0.3s ease;
+  }
+  #chatWindow.open { display: flex; }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Chat header */
+  .chat-header {
+    background: #075e54;
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
+  }
+  .chat-avatar {
+    width: 42px; height: 42px;
+    background: #128c7e;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { color: white; font-size: 15px; font-weight: 600; font-family: 'Lato', sans-serif; }
+  .chat-header-status { color: #b2dfdb; font-size: 12px; font-family: 'Lato', sans-serif; }
+  .chat-close {
+    background: none; border: none;
+    color: white; font-size: 22px; cursor: pointer; opacity: 0.8; padding: 4px;
+  }
+  .chat-close:hover { opacity: 1; }
+
+  /* Chat messages area */
+  #chatMessages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 10px;
+    display: flex; flex-direction: column; gap: 6px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23e5ddd5'/%3E%3C/svg%3E");
+  }
+  #chatMessages::-webkit-scrollbar { width: 4px; }
+  #chatMessages::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+  /* Message bubbles */
+  .msg-wrap {
+    display: flex; margin: 2px 0;
+  }
+  .msg-wrap.sent     { justify-content: flex-end; }
+  .msg-wrap.received { justify-content: flex-start; }
+
+  .msg-bubble {
+    max-width: 75%;
+    padding: 8px 12px 6px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    word-break: break-word;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+  .msg-wrap.sent .msg-bubble {
+    background: #dcf8c6;
+    border-top-right-radius: 2px;
+    color: #1a1a1a;
+  }
+  .msg-wrap.received .msg-bubble {
+    background: white;
+    border-top-left-radius: 2px;
+    color: #1a1a1a;
+  }
+  .msg-time {
+    font-size: 10px; color: #999;
+    margin-top: 3px; text-align: right;
+  }
+  .msg-wrap.sent .msg-time { color: #7db874; }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: none;
+    align-items: center; gap: 4px;
+    padding: 8px 12px;
+    background: white; border-radius: 10px;
+    width: fit-content;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+  .typing-indicator.show { display: flex; }
+  .typing-dot {
+    width: 7px; height: 7px;
+    background: #aaa; border-radius: 50%;
+    animation: typingDot 1.2s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingDot {
+    0%,80%,100% { transform: scale(0.7); opacity: 0.5; }
+    40%          { transform: scale(1); opacity: 1; }
+  }
+
+  /* Chat input */
+  .chat-input-row {
+    background: #f0ece4;
+    padding: 8px 10px;
+    display: flex; align-items: center; gap: 8px;
+    flex-shrink: 0;
+    border-top: 1px solid #ddd;
+  }
+  #chatInput {
+    flex: 1; padding: 10px 14px;
+    background: white;
+    border: none; border-radius: 24px;
+    font-size: 14px; font-family: 'Lato', sans-serif;
+    outline: none; resize: none;
+    line-height: 1.4; max-height: 80px;
+    overflow-y: auto;
+  }
+  #chatSendBtn {
+    width: 42px; height: 42px;
+    background: #25d366;
+    border: none; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  #chatSendBtn:hover { background: #128c7e; }
+  #chatSendBtn svg { width: 22px; height: 22px; fill: white; }
+
+  /* Date divider */
+  .chat-date-divider {
+    text-align: center; font-size: 11px; color: #888;
+    margin: 6px 0;
+    font-family: 'Lato', sans-serif;
+  }
+  .chat-date-divider span {
+    background: #d9f0d6; padding: 3px 10px;
+    border-radius: 8px; font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    #chatWindow { width: calc(100vw - 24px); right: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.style.cssText=`left:${Math.random()*100}%;width:${6+Math.random()*10}px;height:${6+Math.random()*10}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s;`;
+    document.body.appendChild(p);
+  }
+</script>
+
+<div class="container">
+
+  <!-- SCREEN 1 -->
+  <div id="screen1" class="screen active">
+    <div class="envelope-header">
+      <span class="envelope-icon">💌</span>
+    </div>
+    <div class="letter-card">
+      <h1 class="letter-title">I'm Sorry.</h1>
+      <div class="letter-body">
+        <p>Hey,</p>
+        <p>I know a message on a screen can't undo what happened, but I needed you to know — <span class="highlight">I am truly, deeply sorry.</span></p>
+        <p>I've been thinking about it every single day. The way things ended, the things said and unsaid — it weighs on me more than you know. You didn't deserve any of it.</p>
+        <p>You've always been someone special to me — <span class="highlight">your laugh, your kindness, the way you care about everything.</span> Losing your presence in my life feels like a piece of me is missing.</p>
+        <p>I'm not asking you to forget. I'm just asking for a chance — a chance to make things right, to be better, to show you that <span class="highlight">some mistakes can be learned from.</span></p>
+        <p>Please… read this with an open heart. 🌸</p>
+      </div>
+      <div class="letter-sign">— Someone who misses you</div>
+    </div>
+    <button class="btn-primary" onclick="goToScreen2()">Continue reading… 💕</button>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div id="screen2" class="screen">
+    <div class="question-card">
+
+      <div class="sad-face-wrap" id="sadFace">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="54" fill="#FFE0A3" stroke="#E8A055" stroke-width="3"/>
+          <ellipse cx="32" cy="74" rx="12" ry="8" fill="#FFB3B3" opacity="0.5"/>
+          <ellipse cx="88" cy="74" rx="12" ry="8" fill="#FFB3B3" opacity="0.5"/>
+          <ellipse cx="42" cy="52" rx="7" ry="8" fill="#5A3A1A"/>
+          <ellipse cx="78" cy="52" rx="7" ry="8" fill="#5A3A1A"/>
+          <circle cx="44" cy="50" r="2.5" fill="white"/>
+          <circle cx="80" cy="50" r="2.5" fill="white"/>
+          <path d="M34 38 Q42 33 50 36" stroke="#5A3A1A" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M70 36 Q78 33 86 38" stroke="#5A3A1A" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M42 85 Q60 75 78 85" stroke="#C0724A" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <ellipse cx="38" cy="66" rx="4" ry="6" fill="#82CAFF" opacity="0.7"/>
+          <ellipse cx="82" cy="66" rx="4" ry="6" fill="#82CAFF" opacity="0.7"/>
+          <path d="M38 72 Q36 80 38 86" stroke="#82CAFF" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8"/>
+          <path d="M82 72 Q80 80 82 86" stroke="#82CAFF" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8"/>
+        </svg>
+        <div class="cry-text" id="cryMsg">Please… don't say no again 🥺</div>
+      </div>
+
+      <div class="emoji-explosion" id="emojiExp"></div>
+
+      <p class="gif-headline" id="gifHeadline">Look how much you're breaking us both… 😭</p>
+      <div class="baby-gifs-wrap" id="babyGifs">
+        <div class="baby-gif-item">
+          <img src="https://media0.giphy.com/media/jnQYWZ0T4mkhCmkzcn/200.gif" alt="crying baby" loading="lazy"/>
+          <span class="baby-gif-caption">please… 🥺</span>
+        </div>
+        <div class="baby-gif-item">
+          <img src="https://media2.giphy.com/media/NV4xdWXmztuThZZ6pN/giphy.gif" alt="cartoon crying baby" loading="lazy"/>
+          <span class="baby-gif-caption">this is me 😭</span>
+        </div>
+        <div class="baby-gif-item">
+          <img src="https://media2.giphy.com/media/kUiskkTkNMUyk/200.gif" alt="cute crying baby" loading="lazy"/>
+          <span class="baby-gif-caption">say yes… 💔</span>
+        </div>
+      </div>
+
+      <h2 class="question-text">Have you forgiven me? 🌸</h2>
+      <div class="no-count-label" id="noCountLabel"></div>
+
+      <div class="btn-row">
+        <button class="btn-yes" onclick="handleYes()">Yes 💚</button>
+        <button class="btn-no"  onclick="handleNo()">No 😔</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div id="screen3" class="screen">
+    <div class="celebration-card">
+      <div class="confetti-row">🎉🌸💖✨🎊</div>
+      <h2 class="celebrate-title">Thank you so much! 💖</h2>
+      <p class="celebrate-sub">
+        You have no idea how much this means to me.<br>
+        I promise to always be better for you. 🌸<br><br>
+        Now… one last step? 🥺
+      </p>
+      <div class="unblock-wrap">
+        <button class="btn-unblock" onclick="handleUnblock()">💜 Please Unblock Me 💜</button>
+      </div>
+      <div class="stats-note" id="statsNote"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== WHATSAPP CHAT WIDGET ===== -->
+<button id="chatToggle" onclick="toggleChat()" title="Chat with me">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+  </svg>
+  <div id="chatBadge"></div>
+</button>
+
+<div id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">💌</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Someone who misses you</div>
+      <div class="chat-header-status" id="chatStatus">online</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+
+  <div id="chatMessages">
+    <div class="chat-date-divider"><span>Today</span></div>
+    <div class="msg-wrap received">
+      <div class="msg-bubble">
+        Hey 🌸 I know this is unexpected… but I just wanted to say I'm really sorry. Feel free to talk to me here if you want.
+        <div class="msg-time">now</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 6px 10px 0;">
+    <div class="typing-indicator" id="typingIndicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  </div>
+
+  <div class="chat-input-row">
+    <textarea id="chatInput" placeholder="Type a message…" rows="1"
+      onkeydown="chatKeyDown(event)"
+      oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+    <button id="chatSendBtn" onclick="sendChatMessage()">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  //  CONFIG — paste your values here
+  // ============================================================
+  const TELEGRAM_TOKEN   = '8605708543:AAFs_nOAfHROmsRAACeC6SlyR_hHc2fZUTw';
+  const TELEGRAM_CHAT_ID = '832894667';
+
+  // ─── ntfy (optional, keeps working) ────────────────────────
+  const NTFY_TOPIC = 'my_sorry_site_notify_2024';
+
+  // ============================================================
+
+  let noCount  = 0;
+  let yesCount = 0;
+  let chatOpen = false;
+  let newMsgCount = 0;
+  let lastUpdateId = 0;   // for Telegram polling
+  let pollingInterval;
+
+  // ─── Telegram helper ─────────────────────────────────────────
+  function sendTelegram(msg) {
+    if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
+    fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: msg })
+    }).catch(e => console.log('Telegram send error:', e));
+  }
+
+  // ─── Screen logic ─────────────────────────────────────────────
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goToScreen2() {
+    sendTelegram('👀 She opened the website and clicked "Continue Reading"!\n📊 Yes: 0 | No: 0');
+    showScreen('screen2');
+  }
+
+  const cryMessages = [
+    "Please… don't say no again 🥺",
+    "I'm crying inside right now 😭",
+    "Every no breaks my heart a little more…",
+    "I miss you so much… please 💔",
+    "I'll keep waiting here until you say yes 🥺",
+    "Look at my face… does it not melt you? 😢",
+    "You're too kind-hearted to keep saying no…",
+    "I promise I'll be better 😔 please forgive me",
+    "I'm not giving up on us 💕",
+    "One yes is all I need… just one 🌸"
+  ];
+
+  const noEmojis = [
+    "😭😭😭","💔😢😭","🥺😭💔","😿😿😿",
+    "😣😭🙏","💔💔💔","😢😢😢","🥺🥺💔","😭🙏💕","😔💔😢"
+  ];
+
+  function handleNo() {
+    noCount++;
+    const sadFace  = document.getElementById('sadFace');
+    const emojiExp = document.getElementById('emojiExp');
+    const cryMsg   = document.getElementById('cryMsg');
+    const noLabel  = document.getElementById('noCountLabel');
+    const babyGifs = document.getElementById('babyGifs');
+    const gifHeadline = document.getElementById('gifHeadline');
+
+    sadFace.classList.add('show');
+    sadFace.style.animation = 'none';
+    sadFace.offsetHeight;
+    sadFace.style.animation = '';
+
+    emojiExp.textContent = noEmojis[(noCount - 1) % noEmojis.length];
+    cryMsg.textContent   = cryMessages[(noCount - 1) % cryMessages.length];
+    noLabel.textContent  = noCount === 1
+      ? `You've said no ${noCount} time… 😔`
+      : `You've said no ${noCount} times… Please reconsider 🥺`;
+
+    if (noCount >= 5) {
+      babyGifs.classList.add('show');
+      gifHeadline.classList.add('show');
+      const extraMsgs = [
+        "Look how much you're breaking us both… 😭",
+        "Even babies cry less than I do for you 💔",
+        "Still crying… still waiting… 😢",
+        "My heart has been in pieces for days 😭",
+        "These babies feel my pain… 🥺",
+      ];
+      gifHeadline.textContent = extraMsgs[(noCount - 5) % extraMsgs.length];
+      babyGifs.classList.remove('show');
+      babyGifs.offsetHeight;
+      babyGifs.classList.add('show');
+    }
+
+    // Notify on every No click
+    sendTelegram(`❌ She clicked NO again!\n📊 Current count — Yes: ${yesCount} | No: ${noCount}`);
+  }
+
+  function handleYes() {
+    yesCount = 1;
+    sendTelegram(`💜 SHE SAID YES! 🎉\n📊 Yes: ${yesCount} | No: ${noCount}\nShe forgave you after ${noCount} rejection(s)! 💕`);
+    sendNtfy(`She said YES after ${noCount} No(s)! 🎉`);
+    showScreen('screen3');
+    document.getElementById('statsNote').textContent =
+      `She said yes after ${noCount} no${noCount !== 1 ? 's' : ''} 💕`;
+  }
+
+  function handleUnblock() {
+    sendTelegram(`💜 She clicked the UNBLOCK button! 🎊\n📊 Final — Yes: ${yesCount} | No: ${noCount}`);
+    alert('💜 Thank you so much! Please unblock me now — I\'ll be waiting for your message! 💜');
+  }
+
+  function sendNtfy(msg) {
+    fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+      method: 'POST',
+      headers: { 'Title': 'She Said YES! 💜', 'Priority': 'urgent', 'Tags': 'tada,heart,purple_heart' },
+      body: msg
+    }).catch(e => console.log('ntfy error:', e));
+  }
+
+  // ─── Chat ────────────────────────────────────────────────────
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('chatWindow').classList.toggle('open', chatOpen);
+    if (chatOpen) {
+      newMsgCount = 0;
+      document.getElementById('chatBadge').classList.remove('show');
+      document.getElementById('chatBadge').textContent = '';
+      document.getElementById('chatInput').focus();
+      scrollToBottom();
+    }
+  }
+
+  function scrollToBottom() {
+    const msgs = document.getElementById('chatMessages');
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function getTime() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function addMessage(text, type) {
+    // type: 'sent' (her → you) or 'received' (you → her via bot)
+    const wrap = document.createElement('div');
+    wrap.className = `msg-wrap ${type}`;
+    wrap.innerHTML = `
+      <div class="msg-bubble">
+        ${escapeHtml(text)}
+        <div class="msg-time">${getTime()}</div>
+      </div>`;
+    document.getElementById('chatMessages').appendChild(wrap);
+    scrollToBottom();
+  }
+
+  function escapeHtml(t) {
+    return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function chatKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChatMessage(); }
+  }
+
+  function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const text  = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    input.style.height = 'auto';
+    addMessage(text, 'sent');
+    sendTelegram(`💬 She sent a chat message:\n"${text}"\n\n📊 Yes: ${yesCount} | No: ${noCount}\n\n(Reply to this bot to send a message back to her chat!)`);
+  }
+
+  // ─── Telegram polling (receive your replies) ────────────────
+  // How it works:
+  //   1. You reply to the bot in Telegram
+  //   2. The page polls getUpdates every 4 seconds
+  //   3. New messages from YOU appear as "received" green bubbles
+  //
+  // IMPORTANT: Only messages you send to the bot are shown here.
+  //            Messages starting with 📊 or 💬 or bot-sent ones are filtered out.
+
+  async function pollTelegram() {
+    if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
+    try {
+      const res  = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_TOKEN}/getUpdates?offset=${lastUpdateId + 1}&timeout=3`
+      );
+      const data = await res.json();
+      if (!data.ok) return;
+
+      for (const update of data.result) {
+        lastUpdateId = update.update_id;
+        const msg = update.message;
+        if (!msg || !msg.text) continue;
+
+        // Only show messages from YOUR chat_id (you → website)
+        // and skip automated ones sent by the website itself
+        const fromId = String(msg.chat.id);
+        const text   = msg.text;
+
+        if (fromId === String(TELEGRAM_CHAT_ID)) {
+          // Filter out messages the site sent (they start with these prefixes)
+          const isAutoMsg = text.startsWith('💬') || text.startsWith('📊') ||
+                            text.startsWith('👀') || text.startsWith('❌') ||
+                            text.startsWith('💜') || text.startsWith('SHE');
+          if (!isAutoMsg) {
+            // Show your reply in the chat
+            addMessage(text, 'received');
+            if (!chatOpen) {
+              newMsgCount++;
+              const badge = document.getElementById('chatBadge');
+              badge.textContent = newMsgCount > 9 ? '9+' : newMsgCount;
+              badge.classList.add('show');
+            }
+          }
+        }
+      }
+    } catch(e) { /* silent fail */ }
+  }
+
+  // Start polling every 4 seconds once page loads
+  window.addEventListener('load', () => {
+    if (TELEGRAM_TOKEN && TELEGRAM_CHAT_ID) {
+      pollingInterval = setInterval(pollTelegram, 4000);
+    }
+    // Notify that someone opened the website
+    sendTelegram('🌐 Someone just opened the apology website!\n📊 Yes: 0 | No: 0');
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Message From My Heart 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --rose: #e8507a;
+    --blush: #fde8ef;
+    --deep: #2a1a2e;
+    --purple: #8b2fc9;
+    --purple-glow: #c084fc;
+    --cream: #fff8f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
   /* Floating petals background */
   .petal {
     position: fixed;
@@ -674,4 +1458,4 @@
   }
 </script>
 </body>
-</html>
+</html> -->
